@@ -13,7 +13,7 @@ A Telegram bot that provides random Quran verses and supports automated daily po
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/al_quran_bot.git
+   git clone https://github.com/Boburbro/al_quran_bot.git
    cd al_quran_bot
    ```
 
