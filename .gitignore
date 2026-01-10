@@ -1,0 +1,8 @@
+.env
+.daily_poster_state.json
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
