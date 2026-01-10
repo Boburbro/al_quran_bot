@@ -31,7 +31,7 @@ def build_random_verse_payload(client: QuranClient) -> tuple[str, str | None]:
     ayah = verse_key.split(":")[1]
 
     caption += (
-        f"\n\n{surah} surasi {ayah}-oyat Shayx Muhammad Sodik Muhammad Yusuf tarjimasi"
+        f"\n\n{surah} surasi {ayah}-oyat Shayx Muhammad Sodiq Muhammad Yusuf tarjimasi"
     )
     return caption, image_url
 
