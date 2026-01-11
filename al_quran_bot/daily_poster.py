@@ -99,6 +99,13 @@ def register_daily_poster_callbacks(
                 bot.answer_callback_query(
                     call.id, "Rad etildi ❌. Yangisi olinmoqda..."
                 )
-                _send_once(bot, client, config)
+                while True:
+                    try:
+                        _send_once(bot, client, config)
+                        break
+                    except Exception as exc:
+                        print("Daily poster error (rejection):", exc)
+                        time.sleep(config.retry_delay_seconds)
+                        
             except Exception as exc:
                 bot.answer_callback_query(call.id, f"Xato: {exc}", show_alert=True)
