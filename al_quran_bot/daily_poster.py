@@ -14,7 +14,7 @@ class DailyPosterConfig:
     channel_id: int | str
     admin_id: int | None = None
     interval_seconds: int = 60 * 60 * 14
-    retry_delay_seconds: int = 60
+    retry_delay_seconds: int = 5
 
 
 def _send_once(bot: TeleBot, client: QuranClient, config: DailyPosterConfig) -> None:
@@ -55,7 +55,7 @@ def start_daily_poster(
                     sent = True
                 except Exception as exc:
                     print("Daily poster error:", exc)
-                    time.sleep(max(5, int(config.retry_delay_seconds)))
+                    time.sleep(1)
 
             time.sleep(max(60, int(config.interval_seconds)))
 
