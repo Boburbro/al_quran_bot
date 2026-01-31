@@ -6,6 +6,14 @@ import urllib.request
 from typing import Dict, Optional, Tuple
 
 
+DEFAULT_HEADERS: Dict[str, str] = {
+    # Some WAF/CDN setups block the default Python urllib user-agent.
+    # Use a common, benign UA by default; callers may override.
+    "User-Agent": "curl/8.5.0",
+    "Accept": "*/*",
+}
+
+
 def post_form(
     url: str,
     client_id: Optional[str] = None,
@@ -25,7 +33,8 @@ def post_form(
     body = urllib.parse.urlencode(data or {}).encode("utf-8")
     req = urllib.request.Request(url, data=body, method="POST")
 
-    hdrs = dict(headers or {})
+    hdrs = dict(DEFAULT_HEADERS)
+    hdrs.update(headers or {})
     hdrs.setdefault("Content-Type", "application/x-www-form-urlencoded")
     if client_id and client_secret:
         creds = f"{client_id}:{client_secret}".encode("utf-8")
@@ -58,7 +67,8 @@ def get(
 
     req = urllib.request.Request(url, method="GET")
 
-    hdrs = dict(headers or {})
+    hdrs = dict(DEFAULT_HEADERS)
+    hdrs.update(headers or {})
     for k, v in hdrs.items():
         req.add_header(k, v)
 
@@ -86,7 +96,8 @@ def get_bytes(
 
     req = urllib.request.Request(url, method="GET")
 
-    hdrs = dict(headers or {})
+    hdrs = dict(DEFAULT_HEADERS)
+    hdrs.update(headers or {})
     for k, v in hdrs.items():
         req.add_header(k, v)
 
